@@ -1,4 +1,8 @@
 #!/usr/bin/env ruby
-
-require 'nack/server'
-Nack::Server.run(ARGV[0], :file => ARGV[1])
+if RUBY_PLATFORM == 'java'
+  require 'nack/threaded_server'
+  Nack::ThreadedServer.run(ARGV[0], :file => ARGV[1])
+else
+  require 'nack/server'
+  Nack::Server.run(ARGV[0], :file => ARGV[1])
+end
